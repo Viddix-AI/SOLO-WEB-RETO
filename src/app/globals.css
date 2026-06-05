@@ -1,0 +1,259 @@
+/* ============================================================
+   RETO — global stylesheet
+   Token layer ported verbatim from _design/design-tokens.css
+   (the approved prototype). Colors are NOT invented — every hex
+   below matches the design reference exactly.
+   ============================================================ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* ---- Color: stage & surfaces ---- */
+  --bg:            #000000;   /* pure black stage */
+  --surface-1:     #08080A;   /* raised panel */
+  --surface-2:     #0E0E11;   /* card */
+  --surface-3:     #151518;   /* card hover / input */
+  --surface-inset: #060607;
+
+  /* ---- Hairlines & borders ---- */
+  --line:          rgba(255,255,255,0.10);
+  --line-soft:     rgba(255,255,255,0.06);
+  --line-strong:   rgba(255,255,255,0.18);
+  --line-hover:    rgba(255,255,255,0.28);
+
+  /* ---- Text ---- */
+  --ink:           #F4F4F2;   /* primary off-white */
+  --ink-2:         #B6B6B4;   /* secondary */
+  --ink-3:         #87878A;   /* muted / mono labels */
+  --ink-4:         #5C5C5E;   /* faint */
+  --ink-on-light:  #050506;   /* text on white buttons */
+
+  /* ---- Accent (kept monochrome until brand hex confirmed) ---- */
+  --accent:            #EDEEF0;   /* cool silver — primary accent */
+  --accent-ink:        #050506;   /* text/icon on accent */
+  --accent-dim:        rgba(237,238,240,0.14);
+  /* Iridescent chrome pulled from the logo — used VERY sparingly
+     (heartbeat line, hero hairline, focus glints only) */
+  --irid: linear-gradient(100deg,#7FE3D2 0%,#BFC6D6 30%,#E9C9E4 55%,#9FD8CF 80%,#C7C3E0 100%);
+  --irid-soft: linear-gradient(100deg,rgba(127,227,210,.55),rgba(233,201,228,.55),rgba(159,216,207,.55));
+
+  /* ---- Feedback ---- */
+  --positive:      #8FE0B0;
+  --warning:       #E8C98F;
+
+  /* ---- Type ----
+     Sans = Helvetica Neue (system font, kept in the CSS stack).
+     Mono = IBM Plex Mono, loaded via next/font as --font-plex-mono. */
+  --font-sans: "Helvetica Neue", Helvetica, "Inter var", Arial, sans-serif;
+  --font-mono: var(--font-plex-mono, "IBM Plex Mono"), "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Fluid display scale */
+  --fs-display:  clamp(44px, 9vw, 104px);
+  --fs-h1:       clamp(32px, 5.5vw, 64px);
+  --fs-h2:       clamp(26px, 3.6vw, 40px);
+  --fs-h3:       22px;
+  --fs-body-lg:  18px;
+  --fs-body:     16px;
+  --fs-sm:       14px;
+  --fs-label:    12px;   /* mono caps */
+  --fs-micro:    10.5px; /* mono caps tiny */
+
+  --tracking-display: -0.03em;
+  --tracking-tight:   -0.015em;
+  --tracking-label:   0.22em;
+  --tracking-mono:    0.04em;
+
+  /* ---- Spacing (4px base) ---- */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --s-9: 96px; --s-10: 128px; --s-11: 180px;
+
+  /* ---- Radius (tight = clinical precision) ---- */
+  --r-xs: 3px; --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-pill: 999px;
+
+  /* ---- Elevation ---- */
+  --shadow-card: 0 1px 0 rgba(255,255,255,0.04) inset, 0 24px 60px -32px rgba(0,0,0,0.9);
+  --shadow-pop:  0 40px 120px -40px rgba(0,0,0,0.95);
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.55s;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  img { display: block; max-width: 100%; }
+  button { font-family: inherit; color: inherit; cursor: pointer; }
+  input, select, textarea { font-family: inherit; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: rgba(127,227,210,0.25); color: #fff; }
+
+  /* Keyboard focus (accessibility) */
+  button:focus-visible, a:focus-visible, [tabindex]:focus-visible, select:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(127,227,210,0.55);
+    border-radius: var(--r-sm);
+  }
+}
+
+/* ============================================================
+   Components / utilities ported from the prototype
+   ============================================================ */
+@layer components {
+  /* ---- Type ---- */
+  .mono {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 400;
+  }
+  .mono-sm { font-size: var(--fs-micro); letter-spacing: 0.18em; }
+  .display {
+    font-size: var(--fs-display);
+    line-height: 0.94;
+    letter-spacing: var(--tracking-display);
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  .h1 { font-size: var(--fs-h1); line-height: 1.0; letter-spacing: var(--tracking-display); font-weight: 700; text-wrap: balance; }
+  .h2 { font-size: var(--fs-h2); line-height: 1.05; letter-spacing: var(--tracking-tight); font-weight: 600; text-wrap: balance; }
+  .h3 { font-size: var(--fs-h3); line-height: 1.2; letter-spacing: var(--tracking-tight); font-weight: 600; }
+  .lede { font-size: var(--fs-body-lg); line-height: 1.55; color: var(--ink-2); font-weight: 400; }
+  .muted { color: var(--ink-3); }
+  .ink2 { color: var(--ink-2); }
+
+  .irid-text {
+    background: var(--irid);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ---- Primitives ---- */
+  .hairline { height: 1px; width: 100%; background: var(--line); border: 0; }
+  .hairline-irid { height: 1px; width: 100%; background: var(--irid); opacity: 0.5; border: 0; }
+
+  /* vertical hairline grid background */
+  .grid-lines {
+    background-image: repeating-linear-gradient(90deg, var(--line-soft) 0 1px, transparent 1px var(--col, 80px));
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase;
+    border: 1px solid transparent; border-radius: var(--r-sm);
+    padding: 0 22px; height: 50px; white-space: nowrap;
+    transition: all 0.3s var(--ease);
+    user-select: none;
+  }
+  .btn-lg { height: 58px; padding: 0 30px; font-size: 13px; }
+  .btn-sm { height: 40px; padding: 0 16px; font-size: 11px; }
+  .btn-block { display: flex; width: 100%; }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn-primary:hover { background: #fff; box-shadow: 0 0 0 4px var(--accent-dim); transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+  .btn-outline:hover { border-color: var(--line-hover); background: rgba(255,255,255,0.03); }
+  .btn-ghost { background: transparent; color: var(--ink-2); border-color: transparent; padding-left: 8px; padding-right: 8px; }
+  .btn-ghost:hover { color: var(--ink); }
+  .btn[disabled] { opacity: 0.4; pointer-events: none; }
+
+  /* Badge */
+  .badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-2); border: 1px solid var(--line); border-radius: var(--r-pill);
+    padding: 5px 12px; line-height: 1; background: rgba(255,255,255,0.02); white-space: nowrap;
+  }
+  .badge .dot { width: 5px; height: 5px; border-radius: 99px; background: var(--positive); }
+  .badge-irid { border: 0; padding: 1px; background: var(--irid); }
+  .badge-irid > span { display: inline-flex; align-items: center; gap: 7px; background: var(--bg); border-radius: var(--r-pill); padding: 4px 11px; color: var(--ink); }
+
+  /* Card */
+  .card {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+  }
+
+  /* Form field */
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  .field label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); }
+  .field .control,
+  .reto-input {
+    background: var(--surface-inset);
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    color: var(--ink);
+    font-size: 15px;
+    height: 52px;
+    padding: 0 16px;
+    width: 100%;
+    transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+    outline: none;
+  }
+  textarea.reto-input { height: auto; padding: 14px 16px; line-height: 1.5; resize: vertical; }
+  .reto-input::placeholder { color: var(--ink-4); }
+  .reto-input:focus { border-color: var(--line-hover); background: var(--surface-3); }
+  .reto-input:focus-visible { box-shadow: 0 0 0 3px rgba(127,227,210,0.16); }
+  .field.invalid .reto-input { border-color: #C97A7A; }
+  .field .err { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: #D69A9A; text-transform: uppercase; }
+
+  select.reto-input {
+    -webkit-appearance: none; appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2387878A' fill='none' stroke-width='1.2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px;
+  }
+
+  /* Image placeholder (striped) */
+  .img-ph {
+    position: relative; overflow: hidden;
+    background-color: var(--surface-1);
+    background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 9px);
+    border: 1px solid var(--line-soft);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .img-ph .ph-label {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-4); text-align: center; padding: 12px; max-width: 80%;
+  }
+}
+
+/* ============================================================
+   Motion
+   ============================================================ */
+@keyframes ekg-draw { from { stroke-dashoffset: var(--len, 1000); } to { stroke-dashoffset: 0; } }
+@keyframes ekg-sweep { 0% { transform: translateX(-30%); } 100% { transform: translateX(130%); } }
+@keyframes tickerMove { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+
+.ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  /* Force GPU compositing so the marquee runs on its own layer — smooth and
+     continuous, independent of main-thread / mouse activity (no jank/stutter). */
+  will-change: transform;
+  backface-visibility: hidden;
+  animation: tickerMove 180s linear infinite;
+}
+.reveal { opacity: 1; transform: none; transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+.reveal.is-armed { opacity: 0; transform: translateY(14px); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001s !important; }
+  .reveal, .reveal.is-armed { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
