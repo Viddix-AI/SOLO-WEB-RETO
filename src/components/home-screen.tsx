@@ -72,6 +72,8 @@ export function HomeScreen({ region }: { region: Region }) {
               <div className="relative">
                 <ProductImage
                   label="HERO — cámara hiperbárica sobre negro"
+                  src="/chamber.jpg"
+                  priority
                   className="aspect-[4/3] lg:aspect-[3/4]"
                   radius={16}
                 />
@@ -244,6 +246,7 @@ function TeaserCard({
       <div className={big ? "p-4 lg:p-6" : "p-4"}>
         <ProductImage
           label={(big ? "PRODUCTO ESTRELLA — " : "") + copy.name.toUpperCase()}
+          src={`/${pid}.jpg`}
           className={big ? "aspect-[4/3] lg:aspect-[16/11]" : "aspect-[4/3]"}
           radius={10}
         />

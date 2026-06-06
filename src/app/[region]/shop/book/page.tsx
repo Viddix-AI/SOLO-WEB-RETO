@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { regionFromSlug } from "@/lib/regions";
-import { isCheckoutEnabled } from "@/lib/amazon-pay";
 import { BookScreen } from "@/components/shop/book-screen";
 
-export const metadata: Metadata = { title: "The RETO Method" };
+export const metadata: Metadata = { title: "Péptidos: La Nueva Era de la Longevidad" };
 
 export default async function BookPage({
   params,
@@ -14,5 +13,5 @@ export default async function BookPage({
   const { region: slug } = await params;
   const region = regionFromSlug(slug);
   if (!region) notFound();
-  return <BookScreen region={region} checkoutEnabled={isCheckoutEnabled(region.id)} />;
+  return <BookScreen region={region} />;
 }

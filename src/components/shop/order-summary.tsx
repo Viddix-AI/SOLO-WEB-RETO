@@ -33,7 +33,7 @@ export function OrderSummary({
       <Eyebrow className="mb-[18px]">{t("co.summary")}</Eyebrow>
       <div className="flex items-center gap-3.5">
         <div className="w-14 shrink-0">
-          <ProductImage label={name.split(" ")[0]} ratio="1 / 1" radius={8} />
+          <ProductImage label={name.split(" ")[0]} src="/book.jpg" ratio="1 / 1" radius={8} />
         </div>
         <div className="min-w-0 flex-1">
           <div className="text-[14.5px] tracking-[-0.01em]">{name}</div>

@@ -18,7 +18,7 @@ type FilterKey = "all" | "hardware" | "book";
  * Shop / marketplace. Ported from 03-shop-screen.jsx (`ShopScreen`).
  * Client component: filter state drives the chamber hero + product grid.
  */
-export function ShopScreen({ region, checkoutEnabled }: { region: Region; checkoutEnabled: boolean }) {
+export function ShopScreen({ region }: { region: Region }) {
   const { lang, routeSlug: slug } = region;
   const t = (k: TranslationKey) => translate(lang, k);
   const [filter, setFilter] = useState<FilterKey>("all");
@@ -83,6 +83,7 @@ export function ShopScreen({ region, checkoutEnabled }: { region: Region; checko
               <div className="p-4 lg:p-7">
                 <ProductImage
                   label="PRODUCTO ESTRELLA — cámara hiperbárica"
+                  src="/chamber.jpg"
                   className="aspect-[4/3] lg:aspect-square"
                   radius={12}
                 />
@@ -110,7 +111,7 @@ export function ShopScreen({ region, checkoutEnabled }: { region: Region; checko
       <div className="mt-[18px] grid grid-cols-1 gap-[18px] pb-14 lg:mt-6 lg:grid-cols-3 lg:gap-6 lg:pb-[100px]">
         {rest.map((p, i) => (
           <Reveal key={p.id} delay={i * 60}>
-            <ProductCard product={p} region={region} checkoutEnabled={checkoutEnabled} />
+            <ProductCard product={p} region={region} />
           </Reveal>
         ))}
         {filter === "all" &&
@@ -124,15 +125,7 @@ export function ShopScreen({ region, checkoutEnabled }: { region: Region; checko
   );
 }
 
-function ProductCard({
-  product,
-  region,
-  checkoutEnabled,
-}: {
-  product: Product;
-  region: Region;
-  checkoutEnabled: boolean;
-}) {
+function ProductCard({ product, region }: { product: Product; region: Region }) {
   const { lang, routeSlug: slug } = region;
   const c = productCopy(product, lang);
   return (
@@ -140,19 +133,13 @@ function ProductCard({
       href={`/${slug}/shop/${product.id}`}
       className="card flex h-full flex-col bg-surface-2 p-4 text-left transition-colors hover:border-line-hover lg:p-[18px]"
     >
-      <ProductImage label={c.name.toUpperCase()} className="aspect-[4/3]" radius={10} />
+      <ProductImage label={c.name.toUpperCase()} src={`/${product.id}.jpg`} className="aspect-[4/3]" radius={10} />
       <div className="mt-4 flex flex-1 flex-col">
         <div className="mono mono-sm text-ink-4">{c.cat}</div>
         <div className="h3 mt-2 text-[20px]">{c.name}</div>
         <p className="muted mt-2.5 text-[13.5px] leading-[1.55]">{c.short}</p>
         <div className="mt-[18px] flex items-center justify-between border-t border-line-soft pt-4">
-          {product.id === "book" && !checkoutEnabled ? (
-            <span className="mono text-[11.5px] text-ink-3">
-              {region.lang === "es" ? "Próximamente" : "Coming soon"}
-            </span>
-          ) : (
-            <Price pid={product.id} region={region} />
-          )}
+          <Price pid={product.id} region={region} />
           <span className="inline-flex text-ink-3">{Icons.arrow}</span>
         </div>
       </div>

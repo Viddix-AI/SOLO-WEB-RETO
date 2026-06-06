@@ -10,12 +10,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@amazonpay/amazon-pay-api-sdk-nodejs": "^2.3.4",
+    "@stripe/react-stripe-js": "^6.6.0",
+    "@stripe/stripe-js": "^9.7.0",
     "intuit-oauth": "^4.2.3",
     "next": "15.5.19",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "server-only": "^0.0.1"
+    "server-only": "^0.0.1",
+    "stripe": "^22.2.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

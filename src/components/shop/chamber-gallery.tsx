@@ -11,7 +11,7 @@ export function ChamberGallery() {
   const [gi, setGi] = useState(0);
   return (
     <div>
-      <ProductImage label={LABELS[gi]} ratio="1 / 1" radius={16} />
+      <ProductImage label={LABELS[gi]} src={gi === 0 ? "/chamber.jpg" : undefined} ratio="1 / 1" radius={16} />
       <div className="mt-3 grid grid-cols-3 gap-2.5">
         {THUMBS.map((th, i) => (
           <button

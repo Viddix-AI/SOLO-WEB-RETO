@@ -44,3 +44,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local agent state + scratch (not part of the app)
+.claude/
+_candidatas/

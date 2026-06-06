@@ -131,7 +131,7 @@ export function RequestScreen({ region }: { region: Region }) {
             <EKGLine height={18} />
           </div>
           <div className="mt-2">
-            <ProductImage label="CÁMARA HIPERBÁRICA" ratio="16 / 10" radius={14} />
+            <ProductImage label="CÁMARA HIPERBÁRICA" src="/chamber.jpg" ratio="16 / 10" radius={14} />
           </div>
           <p className="mono mono-sm mt-4 leading-[1.7] text-ink-3">{t("p.included")}</p>
         </div>

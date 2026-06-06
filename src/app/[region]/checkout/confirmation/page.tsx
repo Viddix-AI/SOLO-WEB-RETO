@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { regionFromSlug } from "@/lib/regions";
-import { bookChargeAmount } from "@/lib/checkout";
-import { getClient, isCheckoutEnabled } from "@/lib/amazon-pay";
-import { saveConfirmedOrder } from "@/lib/orders";
+import { getStripe, isStripeConfigured } from "@/lib/stripe";
+import { markOrderPaid } from "@/lib/orders";
 import { ConfirmationScreen, type OrderView } from "@/components/shop/confirmation-screen";
 
 export const metadata: Metadata = { title: "Order confirmed" };
@@ -18,58 +17,42 @@ function buildOrderView(base: string, lang: "en" | "es"): OrderView {
 }
 
 /**
- * Amazon Pay checkoutResultReturnUrl. Completes the Checkout Session (capturing
- * the charge), then shows the confirmation from the completed session. Falls
- * back to reading the session if it was already completed.
+ * Stripe return_url. After confirmPayment, Stripe redirects here with the
+ * payment_intent id. We retrieve it server-side to read the authoritative status
+ * + amount, mark the order paid (the webhook is the source of truth, this is a
+ * fallback for local/dev), and show the confirmation.
  */
 export default async function ConfirmationPage({
   params,
   searchParams,
 }: {
   params: Promise<{ region: string }>;
-  searchParams: Promise<{ amazonCheckoutSessionId?: string; qty?: string }>;
+  searchParams: Promise<{ payment_intent?: string; redirect_status?: string }>;
 }) {
   const { region: slug } = await params;
   const region = regionFromSlug(slug);
   if (!region) notFound();
 
   const sp = await searchParams;
-  const sessionId = typeof sp.amazonCheckoutSessionId === "string" ? sp.amazonCheckoutSessionId : "";
-  const charge = bookChargeAmount(region, Number(sp.qty) || 1);
+  const paymentIntentId = typeof sp.payment_intent === "string" ? sp.payment_intent : "";
 
   let order: OrderView | null = null;
-  if (sessionId && isCheckoutEnabled(region.id)) {
-    const client = getClient(region.id)!;
+  if (paymentIntentId && isStripeConfigured()) {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      let data: any;
-      try {
-        const res = await client.completeCheckoutSession(sessionId, {
-          chargeAmount: { amount: charge.amount, currencyCode: charge.currencyCode },
-        });
-        data = res.data;
-      } catch {
-        // Already completed or transient — read the current session state.
-        const res = await client.getCheckoutSession(sessionId);
-        data = res.data;
-      }
-
-      if (data?.statusDetails?.state === "Completed") {
-        const chargeId: string | null = data?.chargeId ?? null;
-        order = buildOrderView(chargeId ?? sessionId, region.lang);
-        saveConfirmedOrder({
-          checkoutSessionId: sessionId,
-          chargeId,
-          buyerEmail: data?.buyer?.email ?? null,
-          amount: charge.amount,
-          currency: charge.currencyCode,
+      const pi = await getStripe().paymentIntents.retrieve(paymentIntentId);
+      if (pi.status === "succeeded") {
+        const paymentMethodId =
+          typeof pi.payment_method === "string" ? pi.payment_method : pi.payment_method?.id ?? null;
+        markOrderPaid(pi.id, paymentMethodId, {
+          buyerEmail: pi.receipt_email ?? null,
+          amount: (pi.amount_received / 100).toFixed(2),
+          currency: pi.currency.toUpperCase(),
           region: region.id,
-          status: "confirmed",
-          createdAt: new Date().toISOString(),
         });
+        order = buildOrderView(pi.id, region.lang);
       }
     } catch (err) {
-      console.error("[RETO] confirmation complete error:", err instanceof Error ? err.message : err);
+      console.error("[RETO] confirmation retrieve error:", err instanceof Error ? err.message : err);
     }
   }
 

@@ -32,7 +32,7 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-shell items-center justify-between px-[18px] py-3.5 lg:px-10 lg:py-[18px]">
         <div className="flex items-center gap-9">
           <Link href={`/${slug}`} aria-label="RETO — Home" className="shrink-0">
-            <RetoLogo height={24} />
+            <RetoLogo height={24} priority />
           </Link>
           <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
             {links.map((l) => (

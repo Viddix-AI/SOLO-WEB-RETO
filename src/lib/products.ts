@@ -53,18 +53,23 @@ export const PRODUCTS: Product[] = [
     slot: "img-book",
     kind: "book",
     hero: false,
+    // Real published book — Amazon ASIN B0GY9PGFCR. Spanish-only edition (no
+    // English edition exists), so the US/en copy keeps the Spanish title and
+    // adds a "(Spanish edition)" descriptor for the buyer.
     en: {
-      name: "The RETO Method",
-      tagline: "The book",
+      name: "Péptidos: La Nueva Era de la Longevidad (Spanish edition)",
+      tagline: "By Jaime Casado and the RETO Health medical team",
       cat: "Protocol Guide",
-      short: "The preventive-medicine protocol behind elite longevity and performance.",
+      // TODO: blurb oficial pendiente — placeholder original (NO copiado de Amazon)
+      short: "Peptides and longevity, explained by RETO's medical team — cutting-edge science made practical.",
     },
     es: {
-      name: "El Método RETO",
-      tagline: "El libro",
+      name: "Péptidos: La Nueva Era de la Longevidad",
+      tagline: "Por Jaime Casado y el equipo médico de RETO Health",
       cat: "Guía de Protocolo",
+      // TODO: blurb oficial pendiente — placeholder original (NO copiado de Amazon)
       short:
-        "El protocolo de medicina preventiva detrás de la longevidad y el rendimiento de élite.",
+        "Péptidos y longevidad, explicados por el equipo médico de RETO: ciencia de vanguardia llevada a la práctica.",
     },
   },
 ];

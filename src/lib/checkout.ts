@@ -10,7 +10,7 @@ export function clampQty(qty: number): number {
 }
 
 export interface BookCharge {
-  /** Amazon Pay amount, decimal string e.g. "59.98". */
+  /** Charge amount as a decimal string, e.g. "59.98". */
   amount: string;
   currencyCode: "USD" | "EUR";
   /** Unit price (29.99) for the order summary. */
@@ -31,4 +31,12 @@ export function bookChargeAmount(region: Region, qty: number): BookCharge {
     unit,
     qty: q,
   };
+}
+
+/**
+ * Smallest-currency-unit amount (cents) for Stripe. USD and EUR are both
+ * 2-decimal currencies, so this is the decimal amount × 100, rounded.
+ */
+export function toMinorUnits(amount: string): number {
+  return Math.round(Number(amount) * 100);
 }

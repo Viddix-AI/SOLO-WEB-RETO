@@ -93,9 +93,10 @@ const en = {
     "High-ticket purchase — our concierge team will guide installation, logistics and financing.",
   // book specifics
   "bk.about.h": "Inside the book",
+  // TODO: blurb oficial pendiente — placeholder original (NO copiado de Amazon)
   "bk.about.b":
-    "The complete preventive-medicine protocol — recovery, longevity, training and clarity — distilled into a single method.",
-  "bk.format": "Hardcover · 312 pages",
+    "What peptides are, how they shape aging and performance, and how RETO's medical team puts them to work inside a longevity protocol.",
+  "bk.format": "Paperback · 358 pages",
   "bk.ship": "Ships in 3–5 business days",
   // checkout
   "co.k": "Secure checkout",
@@ -127,7 +128,7 @@ const en = {
   "co.secure.note": "256-bit encrypted · We never store card data",
   "co.back": "Back to product",
   "co.duties": "Customs & duties payable by buyer on delivery.",
-  "co.amazon": "Pay with your Amazon account — we'll use your Amazon name, email and shipping address.",
+  "co.pay.intro": "Enter your details and pay securely with card. Your payment is processed by Stripe.",
   "co.req.title": "Request this product",
   "co.req.note": "Tell us about your space and timeline — concierge replies within 24h.",
   "co.req.msg": "Message (optional)",
@@ -240,9 +241,10 @@ const es: Record<TranslationKey, string> = {
     "Compra de alto ticket — nuestro equipo concierge guía instalación, logística y financiación.",
   // book specifics
   "bk.about.h": "Dentro del libro",
+  // TODO: blurb oficial pendiente — placeholder original (NO copiado de Amazon)
   "bk.about.b":
-    "El protocolo completo de medicina preventiva — recuperación, longevidad, entrenamiento y claridad — destilado en un solo método.",
-  "bk.format": "Tapa dura · 312 páginas",
+    "Qué son los péptidos, cómo influyen en el envejecimiento y el rendimiento, y cómo el equipo médico de RETO los integra en un protocolo de longevidad.",
+  "bk.format": "Tapa blanda · 358 páginas",
   "bk.ship": "Envío en 3–5 días hábiles",
   // checkout
   "co.k": "Pago seguro",
@@ -274,7 +276,7 @@ const es: Record<TranslationKey, string> = {
   "co.secure.note": "Cifrado de 256 bits · Nunca almacenamos datos de tarjeta",
   "co.back": "Volver al producto",
   "co.duties": "Aduanas e impuestos a cargo del comprador en la entrega.",
-  "co.amazon": "Paga con tu cuenta de Amazon — usaremos tu nombre, email y dirección de envío de Amazon.",
+  "co.pay.intro": "Introduce tus datos y paga de forma segura con tarjeta. El pago lo procesa Stripe.",
   "co.req.title": "Solicitar este producto",
   "co.req.note": "Cuéntanos sobre tu espacio y plazos — concierge responde en 24h.",
   "co.req.msg": "Mensaje (opcional)",
