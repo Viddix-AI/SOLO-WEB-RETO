@@ -57,7 +57,7 @@ export function RegionSelector({ compact = false }: { compact?: boolean }) {
       {open && (
         <div
           role="listbox"
-          className="absolute right-0 top-[calc(100%+8px)] z-[60] min-w-[220px] rounded-xl border border-line bg-surface-2 p-1.5 shadow-pop"
+          className="absolute right-0 top-[calc(100%+8px)] z-[60] min-w-[220px] max-w-[calc(100vw-24px)] rounded-xl border border-line bg-surface-2 p-1.5 shadow-pop"
         >
           <div className="mono mono-sm px-3 pb-1.5 pt-2 text-ink-4">Región · Region</div>
           {REGION_ORDER.map((rid) => {

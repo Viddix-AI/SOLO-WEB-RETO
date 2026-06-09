@@ -72,7 +72,10 @@ export function SiteHeader() {
             onClick={() => setOpen((o) => !o)}
             aria-label={menuLabel}
             aria-expanded={open}
-            className="p-1 text-ink lg:hidden"
+            // -m-3/p-3 grows the tap target to ~46px without changing layout
+            // size — the negative margin cancels the padding so the header
+            // height and icon position stay exactly as designed.
+            className="-m-3 p-3 text-ink lg:hidden"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.3" fill="none">
               {open ? (

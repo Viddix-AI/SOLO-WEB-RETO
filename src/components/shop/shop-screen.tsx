@@ -60,7 +60,7 @@ export function ShopScreen({ region }: { region: Region }) {
               onClick={() => setFilter(k)}
               aria-pressed={active}
               className={[
-                "whitespace-nowrap rounded-pill border px-[18px] py-[9px] font-mono text-[11px] uppercase tracking-[0.12em] transition-colors",
+                "shrink-0 whitespace-nowrap rounded-pill border px-[18px] py-[9px] font-mono text-[11px] uppercase tracking-[0.12em] transition-colors",
                 active
                   ? "border-accent bg-accent text-accent-ink"
                   : "border-line bg-transparent text-ink-2 hover:border-line-hover",
