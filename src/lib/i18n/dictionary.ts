@@ -69,7 +69,10 @@ const en = {
   "p.request": "Request · Contact",
   "p.finance": "Financing available",
   "p.specs": "Specifications",
-  "p.benefits": "Benefits",
+  "p.specs.chamber": "Chamber",
+  "p.specs.unit": "All-in-One Unit",
+  "p.highlights": "Highlights",
+  "p.features": "Features",
   "p.included": "Worldwide shipping included · Customs & duties payable by buyer",
   "p.trust.ship": "Shipping included",
   "p.trust.warranty": "2-year warranty",
@@ -82,13 +85,6 @@ const en = {
   "p.inthebox": "In the box",
   "p.qty": "Quantity",
   // chamber specifics
-  "ch.benefit1.h": "Cellular recovery",
-  "ch.benefit1.b":
-    "Elevated oxygen under pressure accelerates tissue repair and reduces inflammation.",
-  "ch.benefit2.h": "Cognitive clarity",
-  "ch.benefit2.b": "Improved oxygen delivery supports focus, mood and neural recovery.",
-  "ch.benefit3.h": "Performance endurance",
-  "ch.benefit3.b": "Faster turnaround between sessions for athletes operating at the limit.",
   "ch.cta.note":
     "High-ticket purchase — our concierge team will guide installation, logistics and financing.",
   // book specifics
@@ -217,7 +213,10 @@ const es: Record<TranslationKey, string> = {
   "p.request": "Solicitar · Contactar",
   "p.finance": "Financiación disponible",
   "p.specs": "Especificaciones",
-  "p.benefits": "Beneficios",
+  "p.specs.chamber": "Cámara",
+  "p.specs.unit": "Unidad Todo-en-Uno",
+  "p.highlights": "Destacados",
+  "p.features": "Características",
   "p.included": "Envío mundial incluido · Aduanas a cargo del comprador",
   "p.trust.ship": "Envío incluido",
   "p.trust.warranty": "Garantía de 2 años",
@@ -230,13 +229,6 @@ const es: Record<TranslationKey, string> = {
   "p.inthebox": "Incluye",
   "p.qty": "Cantidad",
   // chamber specifics
-  "ch.benefit1.h": "Recuperación celular",
-  "ch.benefit1.b":
-    "El oxígeno elevado bajo presión acelera la reparación de tejidos y reduce la inflamación.",
-  "ch.benefit2.h": "Claridad cognitiva",
-  "ch.benefit2.b": "Mejor aporte de oxígeno que favorece foco, ánimo y recuperación neuronal.",
-  "ch.benefit3.h": "Resistencia y rendimiento",
-  "ch.benefit3.b": "Menor tiempo de recuperación entre sesiones para atletas al límite.",
   "ch.cta.note":
     "Compra de alto ticket — nuestro equipo concierge guía instalación, logística y financiación.",
   // book specifics
